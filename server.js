@@ -45,10 +45,10 @@ app.post('/sendMail',upload.single("pdf"), async (req, res) => {
       
       // DB con
       const connection = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "codealpha"
+        host: process.env.host,
+        user: process.env.user,
+        password: process.env.pwd,
+        database: process.env.db
       });
       
       //////////////     UNIQUE ID GENERATOR
@@ -93,8 +93,6 @@ app.post('/sendMail',upload.single("pdf"), async (req, res) => {
             console.log(err);
             return res.status(503).json({msg:'File generation error'});
           }
-        
-          console.log(data);
         });
 
         // Send the generated PDF as a response
